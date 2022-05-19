@@ -5,18 +5,17 @@ author: "Catalina Cañizares"
 date: "`r format(Sys.time(), '%b %d, %Y')`"
 output:
   xaringan::moon_reader:
-    css: ["default", "rladies-fonts", "assets/cssninja-scaffold.css", "assets/ninjutsu.css"]
+    css: ["default", "rladies-fonts", "css/cssninja-scaffold.css", "css/ninjutsu.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
       highlightLines: true
       highlightSpans: true
       countIncrementalSlides: false
-      beforeInit: "assets/macros.js"
+      beforeInit: "css/macros.js"
+      seal: false
       navigation:
         scroll: false  # disable slide transitions by scrolling
-editor_options: 
-  chunk_output_type: console
 ---
 
 ```{r setup, echo = FALSE}
