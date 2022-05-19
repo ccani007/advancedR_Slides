@@ -339,12 +339,16 @@ rUM::make_project("./")  # ./ means into this folder
 
 [Quarto](https://quarto.org/docs/tools/rstudio.html)
 
-![:scale 80%](images/quarto.png)
-+ Quarto chunk options are typically included in special comments at the top of code chunks
+
 + Quarto doesn’t have a dependency or requirement for R.
 + R Markdown is not going away! 
++ Quarto chunk options are typically included in special comments at the top of code chunks  
+
+![:scale 70%](images/quarto.png)
+
+
 ---
-# Finally...
+# More resources
 
 [R Markdown Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 
