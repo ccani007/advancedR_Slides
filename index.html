@@ -4,7 +4,7 @@
     <title>RMarkdown for Reproducible Reports</title>
     <meta charset="utf-8" />
     <meta name="author" content="Catalina Cañizares" />
-    <meta name="date" content="2022-05-18" />
+    <meta name="date" content="2022-05-19" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/rladies-fonts.css" rel="stylesheet" />
@@ -27,7 +27,7 @@ class: center, middle, inverse, title-slide
 ### Catalina Cañizares
 ]
 .date[
-### May 18, 2022
+### May 19, 2022
 ]
 
 ---
@@ -75,19 +75,17 @@ Yet more than `70%` of researchers have reported failure to reproduce another ex
 
 We magically produce `reproducible` reports.  
 
-This means: 
+Future you and anyone else can pick up your `.Rmd file` and:
 
-```
-Future you and anyone else can pick up your .Rmd file and:  
-+ Reproduce the same results
-+ Have your code, results and text in the same document
-+ Results, figures and tables automatically generate, so updates are not a nightmare
-+ The file format is future-proof (ask for Dr. Odom's thesis...)
++  Reproduce the same results
++  Have your code, results and text in the same document
++  Results, figures and tables automatically generate, so updates are not a nightmare
++  The file format is future-proof (ask for Dr. Odom's thesis...)
 
-```
+
 .center[![:scale 80%](images/repro_spectrum.png)]
 
-*Source*:[Making your research reproducible](https://hbctraining.github.io/reproducibility-tools/lessons/01-Rmarkdown_basics.html)
+*Source*: [Making your research reproducible](https://hbctraining.github.io/reproducibility-tools/lessons/01-Rmarkdown_basics.html)
 ---
 
 # Installing the *`down` and `knitr` Packages
@@ -335,11 +333,20 @@ rUM::make_project("./")  # ./ means into this folder
 
 ![:scale 80%](images/folders_rum.png)
 ---
-# Save yourself some work II![:scale 10%](images/rUM.png)
+# Save yourself some work II ![:scale 10%](images/rUM.png)
 
 
 ![:scale 80%](images/rmd_rum.png)
 
+---
+# A final note 
+
+[Quarto](https://quarto.org/docs/tools/rstudio.html)
+
+![:scale 80%](images/quarto.png)
++ Quarto chunk options are typically included in special comments at the top of code chunks
++ Quarto doesn’t have a dependency or requirement for R.
++ R Markdown is not going away! 
 ---
 # Finally...
 
