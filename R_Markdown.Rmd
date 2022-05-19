@@ -1,0 +1,359 @@
+---
+title: "RMarkdown for Reproducible Reports"
+subtitle: "PHC 6701  - Summer 2022"
+author: "Catalina Cañizares"
+date: "`r format(Sys.time(), '%b %d, %Y')`"
+output:
+  xaringan::moon_reader:
+    css: ["default", "rladies-fonts", "assets/cssninja-scaffold.css", "assets/ninjutsu.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      highlightSpans: true
+      countIncrementalSlides: false
+      beforeInit: "assets/macros.js"
+      navigation:
+        scroll: false  # disable slide transitions by scrolling
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(include = TRUE, comment="")
+xaringanExtra::use_tile_view()
+```
+
+
+```{r, echo=FALSE}
+# Helper packages - need dplyr and ggplot
+library(conflicted)
+suppressMessages(conflict_prefer("select", "dplyr"))
+suppressMessages(conflict_prefer("filter", "dplyr"))
+suppressPackageStartupMessages(library(tidyverse))
+library(ggthemes)
+
+suppressPackageStartupMessages(library(tidymodels))
+tidymodels_prefer()
+
+library(knitr)
+```
+
+
+# Overview
+
+## We will cover the following:
++ Why we need reproducible reporting
++ Installing Packages
++ A Basic RMarkdown Document
++ Code Chunks and Output
++ Annotating your Work
++ Knit a report
++ Inline code
+
+---
+
+
+# Why should we care?
+
+"Reproducibility is a minimum requirement for a finding to be believable" (Goodman et al, 2016 )  
+Yet more than `70%` of researchers have reported failure to reproduce another experiment.   
+
+.center[![:scale 50%](images/reproducibility.png)]
+
+*Source*: [1,500 scientists lift the lid on reproducibility](https://www.nature.com/articles/533452a) 
+
+---
+# Why is there a crisis and what can we do?
+
+.center[![:scale 50%](images/factor_reproducible.png)]
+
+.center[<mark>Making our research more reproducible and shariable</mark> ]
+
+*Source*: [1,500 scientists lift the lid on reproducibility](https://www.nature.com/articles/533452a) 
+---
+# The Magic: R Markdown
+
+We magically produce `reproducible` reports.  
+
+This means: 
+
+```
+Future you and anyone else can pick up your .Rmd file and:  
++ Reproduce the same results
++ Have your code, results and text in the same document
++ Results, figures and tables automatically generate, so updates are not a nightmare
++ The file format is future-proof (ask for Dr. Odom's thesis...)
+
+```
+.center[![:scale 80%](images/repro_spectrum.png)]
+
+*Source*:[Making your research reproducible](https://hbctraining.github.io/reproducibility-tools/lessons/01-Rmarkdown_basics.html)
+---
+
+# Installing the *`down` and `knitr` Packages
+
+.pull-left[ The `knitr` package:
+![](images/knitr.png)
+]
+
+.pull-right[
+The `*down` packages:
++ rmarkdown - basic documents
++ bookdown - books with chapters
++ blogdown - blog posts
++ distill - web format scientific articles
++ rticles - journal articles 
++ rUM - articles from a template
+]
+
+```{r eval=FALSE}
+install.packages("knitr")
+```
+
+```{r eval=FALSE}
+install.packages(c("rmarkdown", "rUM"))
+```
+
+---
+# Why so many packages?
+
+.center[![:scale 100%](images/packages.png)]
+
+*Source*: [R Markdown Workshop](https://ulyngs.github.io/oxberlin-2021-rmd-workshop/) 
+---
+
+# We are all set to create a .Rmd file 
+```
+(`and pass this class`)
+```
+.pull-left[
+.center[![:scale 100%](images/step_1.png)]
+]
+
+.pull-right[
+.center[![:scale 100%](images/step_2.png)]
+]
+
+---
+class: segue
+
+Inspecting the .Rmd file 
+---
+# .Rmd File
+.center[![:scale 100%](images/Rmd_disect.png)]
+
+---
+class: segue
+
+YAML
+---
+# The Meta-Data Header: <mark>YAML</mark>
+
+.pull-left[
++ The first few lines of the document are the document header.  
++ These lines tell R crucial information about how to build your report.   
++ The entire header, and all of the document options in it, are bounded by the three horizontal dashes <mark>(---) </mark> above and below.  
+]
+
+
+.pull-right[.center[![:scale 100%](images/YAML.png)]
+]
+
+**Currently our header is quite basic. It includes:**
+  + The title of the document; title: "My R Markdown File"
+  + Who wrote it: author: "Catalina Canizares"
+  + Today’s date: date: "2022-05-11"
+  + The output type: output: html_document
+
+---
+# Different YAML examples
+
+.pull-left[ 
+**Word Manuscript**
+![:scale 100%](images/word.png)
+]
+
+
+.pull-right[
+**html Presentation**
+![:scale 100%](images/ppt.png)
+]
+
+.pull-left[
+**html Report**
+![:scale 100%](images/simple_html.png)
+]
+
+
+.pull-right[
+**My pdf CV**
+![:scale 100%](images/CV.png)]
+
+[Useful YAML options for HTML reports](https://www.r-bloggers.com/2020/08/useful-yaml-options-for-generating-html-reports-in-r/)
+---
+class: segue
+
+Code Chunks
+---
+# The Chunks 
+
+Anatomy of a Chunk
+.center[![:scale 70%](images/chunk.png)
+]
+ 
+ 
+![:scale 70%](images/chunk_options.png)
+ 
+ *Source:* [Code Chunks](https://rmarkdown.rstudio.com/lesson-3.html)
+---
+# More about Chunks
+
+.center[ 
+**Make chunks like a `pro`**  
+![:scale 60%](images/key_board.png)
+]
+
+.center[
+**Name chunks like a `pro` with <mark>kebab-case</mark>**
+![:scale 70%](images/coding_cases.png)
+]
+
+---
+# Code chunk examples ![:scale 10%](images/palmer_penguins.png)
+
+
+.center[
+** How it should look **  
+![:scale 100%](images/chunk_penguin.png)]
+
+
+---
+class: segue
+
+Markup Text
+
+---
+# Markup Text
+
+Now that you have a report with a header and some code, you need to explain what your code is doing and why.  
++ This is where the plain text comes in. 
++ Outside of a code chunk, type anything you want. You can even include pictures and tables.
+
+.center[
+![:scale 70%](images/markup.png)]
+
+---
+# Pandoc’s Markdown
+.center[
+![:scale 70%](images/text.png)]
+
+---
+
+# Exercise
+.pull-left[
++ Open a new `R Markdown` file
++ Modify the YAML with your information and name your file 
++ Define the setup chunk so we can see the code and the results. 
++ Create a chunk and load `library(palmerpenguins)` and `library(tidyverse)`
++ Create a chunk and load the penguin data `data("penguins")`
++ Create another chunk, name it and explore the data with the glimpse function `glimpse(penguins)`
++ Create another chunk, let's check how many species there are using `penguins %>% count(species)`. Above the chunk comment your finding.
+]
+.pull-right[
++ Create another chunk, let's check the flipper length distribution with `ggplot(penguins), aes(flipper_length_mm) +
+  geom_histogram()`  Above the chunk comment your finding.
+
+![:scale 100%](images/palmer.png)
+
+
+
+*Source:* [Penguins](https://allisonhorst.github.io/palmerpenguins/articles/examples.html) 
+]
+
+
+---
+class: segue
+
+Knit
+
+.center[
+![:scale 50%](images/knitr_sticker.png)]
+
+---
+
+# We are ready to knit our report
+
+Save your report and...
+
+.center[
+![:scale 100%](images/knit.png)]
+
+---
+# Look at your Console while it knits 
+
+.pull-left[
+.center[
+![:scale 100%](images/console.png)]
+]
+
+.pull-right[
+.center[
+![:scale 100%](images/report.png)]
+]
+
+---
+
+# A little more more of that reproducible magic
+
+```{r}
+library(palmerpenguins)
+data("penguins")
+```
+
+Inside your text you can include executable code with the syntax:  
+![:scale 20%](images/inline.png)
+
+For example:
+
+There are `r nrow(penguins)` rows in the `penguins` data set.
+
+**The truth:***  
+![:scale 80%](images/inlinepenguins.png)
+
+---
+# Save yourself some work ![:scale 10%](images/rUM.png)
+
+rUM contains templates to build a good R Markdown.
+
+```{r eval=FALSE}
+rUM::make_project("./")  # ./ means into this folder
+```
+
+
+---
+# Finally...
+
+[R Markdown Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+
+[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+.center[
+![:scale 60%](images/meme3.jpeg)
+]
+
+
+---
+class: segue
+
+# Questions?
+.center[
+![:scale 80%](images/meme1.png)
+]
+---
+
+**This presentation was based on:**  
+1. Dr. Gabriel Odom's  Lesson 3: RMarkdown for Reproducible Reports 
+2. Dr. Raymond Balise class presentation on Markdown and R Markdown on January 25, 2022 at University of Miami. 
+3. All the sources posted throughout the presentation 
+

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>RMarkdown for Reproducible Reports</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Catalina Cañizares" />
+    <meta name="date" content="2022-05-18" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/rladies-fonts.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="assets/cssninja-scaffold.css" type="text/css" />
+    <link rel="stylesheet" href="assets/ninjutsu.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# RMarkdown for Reproducible Reports
+]
+.subtitle[
+## PHC 6701 - Summer 2022
+]
+.author[
+### Catalina Cañizares
+]
+.date[
+### May 18, 2022
+]
+
+---
+
+
+
+
+
+
+
+
+# Overview
+
+## We will cover the following:
++ Why we need reproducible reporting
++ Installing Packages
++ A Basic RMarkdown Document
++ Code Chunks and Output
++ Annotating your Work
++ Knit a report
++ Inline code
+
+---
+
+
+# Why should we care?
+
+"Reproducibility is a minimum requirement for a finding to be believable" (Goodman et al, 2016 )  
+Yet more than `70%` of researchers have reported failure to reproduce another experiment.   
+
+.center[![:scale 50%](images/reproducibility.png)]
+
+*Source*: [1,500 scientists lift the lid on reproducibility](https://www.nature.com/articles/533452a) 
+
+---
+# Why is there a crisis and what can we do?
+
+.center[![:scale 50%](images/factor_reproducible.png)]
+
+.center[&lt;mark&gt;Making our research more reproducible and shariable&lt;/mark&gt; ]
+
+*Source*: [1,500 scientists lift the lid on reproducibility](https://www.nature.com/articles/533452a) 
+---
+# The Magic: R Markdown
+
+We magically produce `reproducible` reports.  
+
+This means: 
+
+```
+Future you and anyone else can pick up your .Rmd file and:  
++ Reproduce the same results
++ Have your code, results and text in the same document
++ Results, figures and tables automatically generate, so updates are not a nightmare
++ The file format is future-proof (ask for Dr. Odom's thesis...)
+
+```
+.center[![:scale 80%](images/repro_spectrum.png)]
+
+*Source*:[Making your research reproducible](https://hbctraining.github.io/reproducibility-tools/lessons/01-Rmarkdown_basics.html)
+---
+
+# Installing the *`down` and `knitr` Packages
+
+.pull-left[ The `knitr` package:
+![](images/knitr.png)
+]
+
+.pull-right[
+The `*down` packages:
++ rmarkdown - basic documents
++ bookdown - books with chapters
++ blogdown - blog posts
++ distill - web format scientific articles
++ rticles - journal articles 
++ rUM - articles from a template
+]
+
+
+```r
+install.packages("knitr")
+```
+
+
+```r
+install.packages(c("rmarkdown", "rUM"))
+```
+
+---
+# Why so many packages?
+
+.center[![:scale 100%](images/packages.png)]
+
+*Source*: [R Markdown Workshop](https://ulyngs.github.io/oxberlin-2021-rmd-workshop/) 
+---
+
+# We are all set to create a .Rmd file 
+```
+(`and pass this class`)
+```
+.pull-left[
+.center[![:scale 100%](images/step_1.png)]
+]
+
+.pull-right[
+.center[![:scale 100%](images/step_2.png)]
+]
+
+---
+class: segue
+
+Inspecting the .Rmd file 
+---
+# .Rmd File
+.center[![:scale 100%](images/Rmd_disect.png)]
+
+---
+class: segue
+
+YAML
+---
+# The Meta-Data Header: &lt;mark&gt;YAML&lt;/mark&gt;
+
+.pull-left[
++ The first few lines of the document are the document header.  
++ These lines tell R crucial information about how to build your report.   
++ The entire header, and all of the document options in it, are bounded by the three horizontal dashes &lt;mark&gt;(---) &lt;/mark&gt; above and below.  
+]
+
+
+.pull-right[.center[![:scale 100%](images/YAML.png)]
+]
+
+**Currently our header is quite basic. It includes:**
+  + The title of the document; title: "My R Markdown File"
+  + Who wrote it: author: "Catalina Canizares"
+  + Today’s date: date: "2022-05-11"
+  + The output type: output: html_document
+
+---
+# Different YAML examples
+
+.pull-left[ 
+**Word Manuscript**
+![:scale 100%](images/word.png)
+]
+
+
+.pull-right[
+**html Presentation**
+![:scale 100%](images/ppt.png)
+]
+
+.pull-left[
+**html Report**
+![:scale 100%](images/simple_html.png)
+]
+
+
+.pull-right[
+**My pdf CV**
+![:scale 100%](images/CV.png)]
+
+[Useful YAML options for HTML reports](https://www.r-bloggers.com/2020/08/useful-yaml-options-for-generating-html-reports-in-r/)
+---
+class: segue
+
+Code Chunks
+---
+# The Chunks 
+
+Anatomy of a Chunk
+.center[![:scale 70%](images/chunk.png)
+]
+ 
+ 
+![:scale 70%](images/chunk_options.png)
+ 
+ *Source:* [Code Chunks](https://rmarkdown.rstudio.com/lesson-3.html)
+---
+# More about Chunks
+
+.center[ 
+**Make chunks like a `pro`**  
+![:scale 60%](images/key_board.png)
+]
+
+.center[
+**Name chunks like a `pro` with &lt;mark&gt;kebab-case&lt;/mark&gt;**
+![:scale 70%](images/coding_cases.png)
+]
+
+---
+# Code chunk examples ![:scale 10%](images/palmer_penguins.png)
+
+
+.center[
+** How it should look **  
+![:scale 100%](images/chunk_penguin.png)]
+
+
+---
+class: segue
+
+Markup Text
+
+---
+# Markup Text
+
+Now that you have a report with a header and some code, you need to explain what your code is doing and why.  
++ This is where the plain text comes in. 
++ Outside of a code chunk, type anything you want. You can even include pictures and tables.
+
+.center[
+![:scale 70%](images/markup.png)]
+
+---
+# Pandoc’s Markdown
+.center[
+![:scale 70%](images/text.png)]
+
+---
+
+# Exercise
+.pull-left[
++ Open a new `R Markdown` file
++ Modify the YAML with your information and name your file 
++ Define the setup chunk so we can see the code and the results. 
++ Create a chunk and load `library(palmerpenguins)` and `library(tidyverse)`
++ Create a chunk and load the penguin data `data("penguins")`
++ Create another chunk, name it and explore the data with the glimpse function `glimpse(penguins)`
++ Create another chunk, let's check how many species there are using `penguins %&gt;% count(species)`. Above the chunk comment your finding.
+]
+.pull-right[
++ Create another chunk, let's check the flipper length distribution with `ggplot(penguins), aes(flipper_length_mm) +
+  geom_histogram()`  Above the chunk comment your finding.
+
+![:scale 100%](images/palmer.png)
+
+
+
+*Source:* [Penguins](https://allisonhorst.github.io/palmerpenguins/articles/examples.html) 
+]
+
+
+---
+class: segue
+
+Knit
+
+.center[
+![:scale 50%](images/knitr_sticker.png)]
+
+---
+
+# We are ready to knit our report
+
+Save your report and...
+
+.center[
+![:scale 100%](images/knit.png)]
+
+---
+# Look at your Console while it knits 
+
+.pull-left[
+.center[
+![:scale 100%](images/console.png)]
+]
+
+.pull-right[
+.center[
+![:scale 100%](images/report.png)]
+]
+
+---
+
+# A little more more of that reproducible magic
+
+
+```r
+library(palmerpenguins)
+data("penguins")
+```
+
+Inside your text you can include executable code with the syntax:  
+![:scale 20%](images/inline.png)
+
+For example:
+
+There are 344 rows in the `penguins` data set.
+
+**The truth:***  
+![:scale 80%](images/inlinepenguins.png)
+
+---
+# Save yourself some work ![:scale 10%](images/rUM.png)
+
+rUM contains templates to build a good R Markdown.
+
+
+```r
+rUM::make_project("./")  # ./ means into this folder
+```
+
+
+---
+# Finally...
+
+[R Markdown Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+
+[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+.center[
+![:scale 60%](images/meme3.jpeg)
+]
+
+
+---
+class: segue
+
+# Questions?
+.center[
+![:scale 80%](images/meme1.png)
+]
+---
+
+**This presentation was based on:**  
+1. Dr. Gabriel Odom's  Lesson 3: RMarkdown for Reproducible Reports 
+2. Dr. Raymond Balise class presentation on Markdown and R Markdown on January 25, 2022 at University of Miami. 
+3. All the sources posted throughout the presentation 
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="assets/macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"highlightSpans": true,
+"countIncrementalSlides": false,
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
